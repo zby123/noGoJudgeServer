@@ -124,7 +124,7 @@ def judge():
     if not suc1:
         finish(0)
 
-    should_reverse = turn = random.randint(0, 1)
+    should_reverse = turn = 0
     record_json['id'] = [turn, 1 - turn]
 
     suc0, suc1 = ai0.init(turn), ai1.init(1 - turn)
@@ -145,10 +145,7 @@ def judge():
         if turn == 0:  # To make the order right
             suc0 = ai0.run(nw, ins)
             if type(suc0) != str:
-                if suc0:
-                    finish(1 - nw.result() if should_reverse else nw.result())
-                else:
-                    finish(1)
+                finish(1)
             else:
                 ins = suc0
             steps += 1
@@ -159,10 +156,7 @@ def judge():
         print('Step: ', steps)
         suc1 = ai1.run(nw, ins)
         if type(suc1) != str:
-            if suc1:
-                finish(1 - nw.result() if should_reverse else nw.result())
-            else:
-                finish(0)
+            finish(0)
         else:
             ins = suc1
         steps += 1
